@@ -17,17 +17,11 @@
    limitations under the License. 
 -->
 
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" onload="main(evt)">
-  <script type="text/ecmascript" xlink:href="svg-comic.js" />
-  <script type="text/ecmascript"><![CDATA[
-    function main(evt) {
-      var comic = new SVGComic(evt, {copyright : "CC-3.0-BY-SA"});
-      comic.addPanel();
-      comic.panel.addCharacter();
-      comic.addPanel({fill : "orange"});
-      comic.panel.addCharacter({vAlign : "middle", hAlign : "center"});
-      comic.addPanel();
-      comic.panel.addCharacter({vAlign : "top", hAlign : "right"});
-    }
-  ]]></script>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g height="80" width="80">
+    <circle r="40" cx="40" cy="40" stroke="black" stroke-width="2" fill="lime" />
+    <circle r="5" cx="35" cy="40" fill="black" />
+    <circle r="5" cx="55" cy="40" fill="black" />
+    <rect x="42" y="60" width="10" height="10" />
+  </g>
 </svg>

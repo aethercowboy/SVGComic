@@ -1,0 +1,58 @@
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<!-- 
+ *  (c) 2011 Jacob P. Silvia.
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  unless required by applicable law or agreed to in writing, software
+ *  distributed under this License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONING OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+-->
+
+<svg xmlns="http://www.w3.org/2000/svg">
+<g height="80" width="80">
+  <circle 
+    cx="40" 
+    cy="40" 
+    r="40" 
+    stroke="black" 
+    stroke-width="2" 
+    fill="aliceblue" 
+  />
+
+  <circle
+    cx="50"
+    cy="40"
+    r="2"
+    stroke="black"
+    stroke-width="1"
+    fill="black"
+  />
+
+  <circle
+    cx="40"
+    cy="40"
+    r="2"
+    stroke="black"
+    stroke-width="1"
+    fill="black"
+  />
+
+  <circle
+    cx="45"
+    cy="60"
+    r="6"
+    stroke="black"
+    stroke-width="1"
+    fill="black"
+  />
+</g>
+</svg>
