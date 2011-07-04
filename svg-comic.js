@@ -32,11 +32,11 @@ function SVGComic(evt, opts) {
 
   this.author    = opts['author']    || 'Jacob P. Silvia';
 
-  this.copyright = opts['copyright'] || "© " + date.getFullYear() + " " + this.author + ". All rights reserved";
+  this.copyright = opts['copyright'] || "© " + date.getFullYear() + " " + this.author + ". All rights reserved.";
   this.fill      = opts['fill']      || 'black';
   this.fontSize  = opts['fontSize']  || 12;
   this.height    = opts['height']    || 300;
-  this.subtitle  = opts['subtitle']  || 'Adventures in Coding';
+  this.subtitle  = opts['subtitle']  || '';
   this.textColor = opts['textColor'] || 'white';
   this.title     = opts['title']     || 'SVGComic';
   this.width     = opts['width']     || 800;
@@ -168,6 +168,10 @@ SVGComic.prototype.update = function() {
 
     panel.update();
   }
+}
+
+SVGComic.prototype.draw = function() {
+  this.update();
 }
 
 function SVGComicPanel(opts) {

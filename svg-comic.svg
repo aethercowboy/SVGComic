@@ -21,13 +21,35 @@
   <script type="text/ecmascript" xlink:href="svg-comic.js" />
   <script type="text/ecmascript"><![CDATA[
     function main(evt) {
-      var comic = new SVGComic(evt, {copyright : "CC-3.0-BY-SA"});
+      var comic = new SVGComic(evt, { 
+        copyright : "CC-3.0-BY-SA"
+      });
+
+      var squareMouth = 'assets/characters/square-mouth.svg';
+
       comic.addPanel();
       comic.panel.addCharacter();
-      comic.addPanel({fill : "orange"});
-      comic.panel.addCharacter({vAlign : "middle", hAlign : "center"});
+      comic.panel.addCharacter({
+        resource  : squareMouth,
+        hAlign    : 'right',
+        direction : 'left',
+      });
+
+      comic.addPanel({
+        fill : "yellow"
+      });
+      comic.panel.addCharacter({
+        vAlign : "middle", 
+        hAlign : "center",
+      });
+
       comic.addPanel();
-      comic.panel.addCharacter({vAlign : "top", hAlign : "right"});
+      comic.panel.addCharacter({
+        vAlign : "bottom", 
+        hAlign : "right",
+      });
+
+      comic.draw();
     }
   ]]></script>
 </svg>
