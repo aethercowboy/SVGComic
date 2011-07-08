@@ -17,7 +17,7 @@ First, create the comic object:
 Options include:
 
   author    : The author (you!), defaults to Jacob P. Silvia (me!)
-  copyright : Copyright (or -left), defaults to "© YYYY AUTHOR. All rights reserved"
+  copyright : Copyright (or -left), defaults to "Â© YYYY AUTHOR. All rights reserved"
   fill      : Color of the background/gutters, defaults to black
   fontSize  : Preferred font size, defaults to 12
   height    : Preferred comic height, defaults to 300
