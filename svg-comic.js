@@ -30,7 +30,7 @@ function SVGComic(evt, opts) {
 
   var date = new Date();
 
-  this.author    = opts['author']    || 'Jacob P. Silvia';
+  this.author    = opts['author']    || 'A. N. Onymous';
 
   this.copyright = opts['copyright'] || "© " + date.getFullYear() + " " + this.author + ". All rights reserved.";
   this.fill      = opts['fill']      || 'black';
@@ -38,7 +38,7 @@ function SVGComic(evt, opts) {
   this.height    = opts['height']    || 300;
   this.subtitle  = opts['subtitle']  || '';
   this.textColor = opts['textColor'] || 'white';
-  this.title     = opts['title']     || 'SVGComic';
+  this.title     = opts['title']     || 'Untitled';
   this.width     = opts['width']     || 800;
   this.xGutter   = opts['xGutter']   || 10;
 
