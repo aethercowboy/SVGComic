@@ -16,6 +16,20 @@
 //**************************************************************************//
 
 function SVGComic(evt, opts) {
+  /// <summary>The main SVGComic object</summary>
+  /// <param name="evt">The calling event</param>
+  /// <param name="opts">The desired options</param>
+  /// <option name="author">The author's name (defaults to A. N. Onymous)</option>
+  /// <option name="copyright">The preferred copyright statement (defaults to "&copy YEAR AUTHOR. All rights reserved")</option>
+  /// <option name="fill">Preferred gutter color (defaults to black)</option>
+  /// <option name="fontSize">Preferred font size for title/author/subtitle/copyright (defaults to 12)</option>
+  /// <option name="height">Preferred comic height (defaults to 300)</option>
+  /// <option name="subtitle">Preferred secondary/episode title (defaults to blank)</option>
+  /// <option name="textColor">Preferred color for title/etc. text (defaults to white)</option>
+  /// <option name="title">Preferred title (defaults to "untitled")</option>
+  /// <option name="width">Preferred comic width (defaults to 800)</option>
+  /// <option name="xGutter">Preferred horizontal gutter (defaults to 10)</option>
+  
   if (window.svgDocument == null) {
     svgDocument = evt.target.ownerDocument;
   }
@@ -51,6 +65,8 @@ function SVGComic(evt, opts) {
 }
 
 SVGComic.prototype.initialize = function() {
+  /// <summary>Initializes the comic using the specified settings</summary>
+  
   this.initializeSVG();
   this.initializeDefs();
   this.initializeElement();
@@ -61,6 +77,8 @@ SVGComic.prototype.initialize = function() {
 }
 
 SVGComic.prototype.initializeSVG = function() {
+  /// <summary>Initialzies the SVG element.</summary>
+  
   this.svg.setAttribute('height', this.height);
   this.svg.setAttribute('width', this.width);
 
@@ -69,12 +87,16 @@ SVGComic.prototype.initializeSVG = function() {
 }
 
 SVGComic.prototype.initializeDefs = function() {
+  /// <summary>Initializes DEFS element (for storing SVG defs)</summary>
+  
   this.defs = this.document.createElementNS(this.ns, "defs");
 
   this.svg.appendChild(this.defs);
 }
 
 SVGComic.prototype.initializeElement = function() {
+  /// <summary>Initializes comic RECT</summery>
+  
   this.element = this.document.createElementNS(this.ns, "rect");
 
   this.element.setAttribute('height', this.height);
@@ -85,6 +107,8 @@ SVGComic.prototype.initializeElement = function() {
 }
 
 SVGComic.prototype.initializeTitle = function() {
+  /// <summary>Initializes comic title element</summary>
+  
   this.titleElement = this.document.createElementNS(this.ns, "text");
 
   var data = this.document.createTextNode(this.title);
@@ -100,6 +124,8 @@ SVGComic.prototype.initializeTitle = function() {
 }
 
 SVGComic.prototype.initializeAuthor = function() {
+  /// <summary>Initializes comic author element</summary>
+  
   this.authorElement = this.document.createElementNS(this.ns, "text");
 
   var data = this.document.createTextNode(this.author);
@@ -115,6 +141,8 @@ SVGComic.prototype.initializeAuthor = function() {
 }
 
 SVGComic.prototype.initializeSubtitle = function() {
+  /// <summary>Initializes secondary title element</summary>
+  
   this.subtitleElement = this.document.createElementNS(this.ns, "text");
 
   var data = this.document.createTextNode(this.subtitle);
@@ -131,6 +159,8 @@ SVGComic.prototype.initializeSubtitle = function() {
 
 
 SVGComic.prototype.initializeCopyright = function() {
+  /// <summary>Initializes copyright element</summary>
+  
   this.copyrightElement = this.document.createElementNS(this.ns, "text");
 
   var data = this.document.createTextNode(this.copyright);
@@ -146,6 +176,9 @@ SVGComic.prototype.initializeCopyright = function() {
 }
 
 SVGComic.prototype.addPanel = function(opts) {
+  /// <summary>Creates a panel for the comic</summary>
+  /// <param name="opts">The options for the panel (See options for SVGComicPanel)</param>
+  
   if (opts == null) {
     opts = new Array();
   }
@@ -163,6 +196,8 @@ SVGComic.prototype.addPanel = function(opts) {
 }
 
 SVGComic.prototype.update = function() {
+  /// <summary>Updates the metrics for the comic and children elements</summary>
+  
   for (var i = 0; i < this.panels.length; i++) {
     var panel = this.panels[i];
 
@@ -171,10 +206,22 @@ SVGComic.prototype.update = function() {
 }
 
 SVGComic.prototype.draw = function() {
+  /// <summary>Draws the comic and children</summary>
+  
   this.update();
 }
 
 function SVGComicPanel(opts) {
+  /// <summary>The Comic Panel object</summary>
+  /// <param name="opts">The options for the comic panel</param>
+  /// <option name="parent">The parent element (defaults to calling SVGComic object)</option>
+  /// <option name="number">The order of panels (defaults to previous + 1, or 0 if first)</option>
+  /// <option name="width">The width of the panel (defaults to be proportional to number of panels)</option>
+  /// <option name="height">The height of the panel (defaults to comic height minus the gutters)</option>
+  /// <option name="x">The preferred x-position (defaults to next available x-position)</option>
+  /// <option name="y">The preferred y-position (defaults to top minus gutter)</option>
+  /// <option name="fill">The default background color (defaults to aliceblue)</option>
+  
   if (opts == null) {
     opts = new Array();
   }
@@ -203,12 +250,16 @@ function SVGComicPanel(opts) {
 }
 
 SVGComicPanel.prototype.initialize = function() {
+  /// <summary>Initializes SVGComicPanel</summary>
+  
   this.initializeClipPath();
   this.initializeGroupElement();
   this.initializeElement();
 }
 
 SVGComicPanel.prototype.initializeClipPath = function() {
+  /// <summary>Initializes panel's clip path (to keep stuff inside the panel)</summary>
+  
   this.clipPath = this.document.createElementNS(this.ns, "clipPath");
 
   var id = 'clip' + this.number;
@@ -226,6 +277,8 @@ SVGComicPanel.prototype.initializeClipPath = function() {
 }
 
 SVGComicPanel.prototype.initializeGroupElement = function() {
+  /// <summary>Initializes group element (to store panel content)</summary>
+  
   this.groupElement = this.document.createElementNS(this.ns, "g");
 
   this.groupElement.setAttribute('clip-path', 'url(#clip' + this.number + ')');
@@ -238,6 +291,8 @@ SVGComicPanel.prototype.initializeGroupElement = function() {
 }
 
 SVGComicPanel.prototype.initializeElement = function() {
+  /// <summary>Initializes panel RECT element</summary>
+  
   this.element = this.document.createElementNS(this.ns, "rect");
 
   this.element.setAttribute('height', this.height);
@@ -248,6 +303,9 @@ SVGComicPanel.prototype.initializeElement = function() {
 }
 
 SVGComicPanel.prototype.getAvailableX = function() {
+  /// <summary>Gets the next available X</summary>
+  /// <returns type="Number">value of next available x-position</returns>
+  
   if (this.number > 0) {
     var previousPanel = this.parent.panels[this.number - 1];
 
@@ -258,6 +316,9 @@ SVGComicPanel.prototype.getAvailableX = function() {
 }
 
 SVGComicPanel.prototype.getAvailableWidth = function() {
+  /// <summary>Gets available width based on other panels (only if width is unspecified)</summary>
+  /// <returns type="Number">The available width for this panel</returns>
+  
   var availableWidth = this.parent.width;
 
   var length = this.parent.panels.length;
@@ -284,6 +345,8 @@ SVGComicPanel.prototype.getAvailableWidth = function() {
 }
 
 SVGComicPanel.prototype.update = function() {
+  /// <summary>Updates the panel and its children</summary>
+  
   this.updateWidth();
   this.updateX();
 
@@ -295,6 +358,8 @@ SVGComicPanel.prototype.update = function() {
 }
 
 SVGComicPanel.prototype.updateWidth = function() {
+  /// <summary>Updates available width for panel</summary>
+  
   if (! this.fixedWidth) {
     this.width = this.getAvailableWidth();
     this.clipPathElement.setAttribute('width', this.width);
@@ -304,15 +369,22 @@ SVGComicPanel.prototype.updateWidth = function() {
 }
 
 SVGComicPanel.prototype.updateX = function() {
+  /// <summary>Updates next available x-position for panel)</summary>
+  
   this.x = this.getAvailableX()
   this.updateTransform();
 }
 
 SVGComicPanel.prototype.updateTransform = function() {
+  /// <summary>Updates the Transform (see below)</summary>
+  
   updateTransform(this);
 }
 
 SVGComicPanel.prototype.addCharacter = function(opts) {
+  /// <summary>Adds a character to the panel</summary>
+  /// <param name="opts">The character options (see SVGComicCharacter)</param>
+  
   if (opts == null) {
     opts = new Array();
   }
@@ -330,6 +402,16 @@ SVGComicPanel.prototype.addCharacter = function(opts) {
 }
 
 function SVGComicCharacter(opts) {
+  /// <summary>A SVGComicCharacter object</summary>
+  /// <param name="opts">The specified options</param>
+  /// <option name="parent">The parent object (defaults to calling Panel)</option>
+  /// <option name="resource">An SVG file to represent the character (defaults to defualt.svg)</option>
+  /// <option name="vAlighn">The vertical alignment {top, middle, bottom} (defaults to bottom)</option>
+  /// <option name="hAlighn">The horizontal alignment {left, center, right} (defaults to left)</option>
+  /// <option name="direction">The direction the character is facing (default right). Assumes character SVG is facing the right</option>
+  /// <option name="x">The preferred x-offset (default is 0)</option>
+  /// <option name="y">The preferred y-offset (default is 0)</option>
+  
   if (opts == null) {
     opts = new Array();
   }
@@ -352,6 +434,8 @@ function SVGComicCharacter(opts) {
 }
 
 SVGComicCharacter.prototype.initialize = function() {
+  /// <summary>Initializes the character</summary>
+  
   this.initializeGroupElement();
   this.initializeResource();
 
@@ -359,6 +443,8 @@ SVGComicCharacter.prototype.initialize = function() {
 }
 
 SVGComicCharacter.prototype.initializeGroupElement = function() {
+  /// <summary>Initializes group element that stores character</summary>
+  
   this.groupElement = this.document.createElementNS(this.ns, "g");
 
   this.groupElement.id = "character" + this.number;
@@ -367,6 +453,8 @@ SVGComicCharacter.prototype.initializeGroupElement = function() {
 }
 
 SVGComicCharacter.prototype.initializeResource = function() {
+  /// <summary>Loads the SVG resource that represents the character</summary>
+  
   var obj = this;
 
   var xhr = new XMLHttpRequest;
@@ -389,11 +477,15 @@ SVGComicCharacter.prototype.initializeResource = function() {
 }
 
 SVGComicCharacter.prototype.update = function() {
+  /// <summary>Updates character and children</summary>
+  
   this.updateVAlign();
   this.updateHAlign();
 }
 
 SVGComicCharacter.prototype.updateVAlign = function() {
+  /// <summary>Updates the vertical alignment based on value and character/panel height</summary>
+  
   if (this.vAlign == 'bottom') {
     this.y = this.parent.height - this.element.getAttribute('height');
     this.updateTransform();
@@ -410,6 +502,8 @@ SVGComicCharacter.prototype.updateVAlign = function() {
 }
 
 SVGComicCharacter.prototype.updateHAlign = function() {
+  /// <summary>Updates the horizontal alignment based on value and character/panel width</summary>
+  
   if (this.hAlign == 'left') {
     this.x = 0;
     this.updateTransform();
@@ -426,16 +520,27 @@ SVGComicCharacter.prototype.updateHAlign = function() {
 }
 
 SVGComicCharacter.prototype.updateTransform = function() {
+  /// <summary>Updates the transform (see below)</summary>
+  
   updateTransform(this);
 }
 
 function updateTransform(obj) {
+  /// <summary>Translates the specified object depending on it's x- and y-offset</summary>
+  /// <param name="obj">The specified object (e.g., SVGComicPanel, SVGComicCharacter)</param>
+  
   var translate = "translate(" + obj.x + ", " + obj.y + ")";
 
   obj.groupElement.setAttribute('transform', translate);
 }
 
 function cloneToDoc(node, doc, ns) {
+  /// <summary>Clones an element into the specified namespace</summary>
+  /// <param name="node">The node to clone</param>
+  /// <param name="doc">The current document</param>
+  /// <param name="ns">The namespace</param>
+  /// <returns type="Object">The cloned element</returns>
+  
   if (! doc) doc = document;
 
   var clone = doc.createElementNS(ns, node.nodeName);
