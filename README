@@ -16,7 +16,7 @@ First, create the comic object:
 
 Options include:
 
-  author    : The author (you!), defaults to Jacob P. Silvia (me!)
+  author    : The author (you!), defaults to A. N. Onymous
   copyright : Copyright (or -left), defaults to "© YYYY AUTHOR. All rights reserved"
   fill      : Color of the background/gutters, defaults to black
   fontSize  : Preferred font size, defaults to 12
