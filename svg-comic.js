@@ -427,6 +427,8 @@ function SVGComicCharacter(opts) {
   this.direction = opts['direction'] || 'right';
   this.x         = opts['x']         || 0;
   this.y         = opts['y']         || 0;
+  
+  this.width     = 0;
 
   this.document = this.parent.document;
   this.ns       = this.parent.ns;
@@ -476,6 +478,8 @@ SVGComicCharacter.prototype.initializeResource = function() {
   };
 
   xhr.send();
+  
+  this.width = this.element.getAttribute("width");
 }
 
 SVGComicCharacter.prototype.update = function() {
@@ -531,9 +535,35 @@ function updateTransform(obj) {
   /// <summary>Translates the specified object depending on it's x- and y-offset</summary>
   /// <param name="obj">The specified object (e.g., SVGComicPanel, SVGComicCharacter)</param>
   
-  var translate = "translate(" + obj.x + ", " + obj.y + ")";
+  var local_x = 0; // x-position
+  var local_y = 0; // y-position
+  var local_a = 1; // x-scale
+  var local_b = 1; // y-scale
+  var local_w = 0; // width
+  
+  if (obj.x != null) {
+    local_x = +obj.x;
+  }
+  
+  if (obj.y != null) {
+    local_y = +obj.y;
+  }
+  
+  if (obj.width != null) {
+    local_w = +obj.width;
+  }
+  
+  if (obj.direction == "right") {
+    local_a = -1;
+    local_x += local_w;
+  }
+  
+  var translate = "translate(" + local_x + ", " + local_y + ")";
+  var scale     = "scale(" + local_a + ", " + local_b + ")";
+  
+  var transform = translate + "," + scale
 
-  obj.groupElement.setAttribute('transform', translate);
+  obj.groupElement.setAttribute('transform', transform);
 }
 
 function cloneToDoc(node, doc, ns) {
