@@ -20,7 +20,8 @@ function SVGComic(evt, opts) {
   /// <param name="evt">The calling event</param>
   /// <param name="opts">The desired options</param>
   /// <option name="author">The author's name (defaults to A. N. Onymous)</option>
-  /// <option name="copyright">The preferred copyright statement (defaults to "&copy YEAR AUTHOR. All rights reserved")</option>
+  /// <option name="copyright">The preferred copyright statement (defaults to "&copy YEAR AUTHOR. All rights 
+  /// reserved")</option>
   /// <option name="fill">Preferred gutter color (defaults to black)</option>
   /// <option name="fontSize">Preferred font size for title/author/subtitle/copyright (defaults to 12)</option>
   /// <option name="height">Preferred comic height (defaults to 300)</option>
@@ -408,7 +409,8 @@ function SVGComicCharacter(opts) {
   /// <option name="resource">An SVG file to represent the character (defaults to defualt.svg)</option>
   /// <option name="vAlighn">The vertical alignment {top, middle, bottom} (defaults to bottom)</option>
   /// <option name="hAlighn">The horizontal alignment {left, center, right} (defaults to left)</option>
-  /// <option name="direction">The direction the character is facing (default right). Assumes character SVG is facing the right</option>
+  /// <option name="direction">The direction the character is facing (default right). Assumes character SVG is facing 
+  /// the right</option>
   /// <option name="x">The preferred x-offset (default is 0)</option>
   /// <option name="y">The preferred y-offset (default is 0)</option>
   
