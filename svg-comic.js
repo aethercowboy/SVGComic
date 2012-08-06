@@ -451,7 +451,7 @@ SVGComicCharacter.prototype.initializeGroupElement = function() {
   
   this.groupElement = this.document.createElementNS(this.ns, "g");
 
-  this.groupElement.id = "character" + this.number;
+  this.groupElement.id = "character" + this.number + "_" + this.parent.number;
 
   this.parent.groupElement.appendChild(this.groupElement);
 }
