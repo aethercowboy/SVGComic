@@ -553,7 +553,7 @@ function updateTransform(obj) {
     local_w = +obj.width;
   }
   
-  if (obj.direction == "right") {
+  if (obj.direction == "left") {
     local_a = -1;
     local_x += local_w;
   }
