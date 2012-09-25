@@ -29,10 +29,16 @@
 
       comic.addPanel();
       comic.panel.addCharacter();
+      comic.panel.character.addDialog({
+        text : "Hello, world!",
+      });
       comic.panel.addCharacter({
         resource  : squareMouth,
         hAlign    : 'right',
         direction : 'left',
+      });
+      comic.panel.character.addDialog({
+        text : "It's pronounced 'Voorld'",
       });
 
       comic.addPanel({

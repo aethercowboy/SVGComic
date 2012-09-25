@@ -246,6 +246,7 @@ function SVGComicPanel(opts) {
   this.svg      = this.parent.svg;
 
   this.characters = new Array();
+  this.dialogs    = new Array();
 
   this.initialize();
 }
@@ -356,6 +357,12 @@ SVGComicPanel.prototype.update = function() {
 
     character.update();
   }
+  
+  for (var i = 0; i < this.dialogs.length; i++) {
+    var dialog = this.dialogs[i];
+    
+    dialog.update();
+  }
 }
 
 SVGComicPanel.prototype.updateWidth = function() {
@@ -433,6 +440,8 @@ function SVGComicCharacter(opts) {
   this.document = this.parent.document;
   this.ns       = this.parent.ns;
   this.svg      = this.parent.svg;
+
+  this.dialogs = new Array();
 
   this.initialize();
 }
@@ -528,6 +537,130 @@ SVGComicCharacter.prototype.updateHAlign = function() {
 SVGComicCharacter.prototype.updateTransform = function() {
   /// <summary>Updates the transform (see below)</summary>
   
+  updateTransform(this);
+}
+
+SVGComicCharacter.prototype.addDialog = function(opts) {
+  /// <summary>Adds a piece of dialog to the comic</summary>
+
+  if (opts == null) {
+    opts = new Array();
+  }
+
+  opts['parent']    = this.parent;
+  opts['character'] = this;
+  opts['hAlign']    = this.hAlign;
+  opts['number']    = this.parent.dialogs.length || 0;
+
+  var dialog = new SVGComicDialog(opts);
+
+  this.parent.dialogs.push(dialog);
+
+  this.parent.dialog = this.parent.dialogs[this.parent.dialogs.length - 1];
+
+  this.update();
+}
+
+function SVGComicDialog(opts) {
+  /// <summary>The Comic Dialog object</summary>
+  
+  if (opts == null) {
+    opts = new Array();
+  }
+
+  this.parent = opts['parent'];
+
+  this.number = opts['number'] || 0;
+  this.text   = opts['text']  || "";
+  this.style  = opts['style'] || "rounded";
+  this.hAlign = opts['hAlign'] || "left";
+  this.vAlign = opts['vAlign'] || "top";
+
+  this.document = this.parent.document;
+  this.ns       = this.parent.ns;
+  this.svg      = this.parent.svg;
+
+  this.initialize();
+}
+
+SVGComicDialog.prototype.initialize = function() {
+  // <summary>Initializes Dialog element</summary>
+
+  this.initalizeTextElement();
+
+  this.update();
+}
+
+SVGComicDialog.prototype.initalizeTextElement = function() {
+  this.textElement = this.document.createElementNS(this.ns, "text");
+
+  var data = this.document.createTextNode(this.text);
+  this.textElement.appendChild(data);
+  
+  var textAnchor;
+  
+  if (this.hAlign == "left") {
+    textAnchor = "start";
+  } else if (this.hAlign == "center") {
+    textAnchor = "middle";
+  } else if (this.hAlign == "right") {
+    textAnchor = "end";
+  } else {
+    textAnchor = "start";
+  }
+
+  this.textElement.setAttribute('fill', this.textColor);
+  this.textElement.setAttribute('text-anchor', textAnchor);
+  
+  this.groupElement = this.textElement;
+  this.element      = this.textElement;
+
+  this.parent.groupElement.appendChild(this.textElement);
+}
+
+SVGComicDialog.prototype.update = function() {
+  // <summary>Updates Dialog Element</summary>
+  this.updateVAlign();
+  this.updateHAlign();
+}
+
+SVGComicDialog.prototype.updateVAlign = function() {
+  /// <summary>Updates the vertical alignment based on value and text/panel height</summary>
+  
+  if (this.vAlign == 'bottom') {
+    this.y = this.parent..height - this.element.getAttribute('height');
+    this.updateTransform();
+  } else if (this.vAlign == 'middle') {
+    this.y = this.parent.height / 2 - this.element.getAttribute('height') / 2;
+    this.updateTransform();
+  } else if (this.vAlign == 'top') {
+    this.y = (this.parent.parent.fontSize + 3) * (this.number + 1);
+    this.updateTransform();
+  } else {
+    this.vAlign = 'top';
+    this.updateVAlign();
+  }
+}
+
+SVGComicDialog.prototype.updateHAlign = function() {
+  /// <summary>Updates the horizontal alignment based on value and text/panel width</summary>
+  
+  if (this.hAlign == 'left') {
+    this.x = 0;
+    this.updateTransform();
+  } else if (this.hAlign == 'center') {
+    this.x = this.parent.width / 2 - this.element.getAttribute('width') / 2;
+    this.updateTransform();
+  } else if (this.hAlign == 'right') {
+    this.x = this.parent.width - this.element.getAttribute('width');
+    this.updateTransform();
+  } else {
+    this.hAlign = 'left';
+    this.updateHAlign();
+  }
+}
+
+SVGComicDialog.prototype.updateTransform = function() {
   updateTransform(this);
 }
 
