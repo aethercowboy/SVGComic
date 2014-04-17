@@ -3,6 +3,11 @@ SVGComic
 
 SVGComic is a Dynamic SVG-based Webcomic-generating JavaScript Engine.
 
+DEPENDENCIES
+------------
+
+SVGComic is dependent on d3.js (http://d3js.org/). Please have this library loaded before you use SVGComic.
+
 USAGE
 -----
 
