@@ -11,13 +11,11 @@ SVGComic is dependent on d3.js (http://d3js.org/). Please have this library load
 USAGE
 -----
 
-You include the svg-comic.js script into your SVG, add an onload="main(evt)" to your SVG
-tag, and then create a new SCRIPT block for your code. See the included sample for a
-suggested usage.
+You include the svg-comic.js script into your SVG and then create a new SCRIPT block for your code. See the included sample for a suggested usage.
 
 First, create the comic object:
 
-    var comic = new SVGComic(evt, {ARG : 'VALUE'});
+    var comic = new SVGComic(selector, {ARG : 'VALUE'});
 
 Options include:
 
