@@ -1,7 +1,7 @@
 ﻿// svg-comic.js
 
 //**************************************************************************//
-// (c) 2011 Jacob P. Silvia.                                                //
+// (c) 2011-2014 Jacob P. Silvia.                                                //
 // Licensed under the Apache License, Version 2.0 (the "License");          //
 // you may not use this file except in compliance with the License.         //
 // You may obtain a copy of the License at                                  //
@@ -14,6 +14,65 @@
 // See the License for the specific language governing permissions and      //
 // limitations under the License.                                           //
 //**************************************************************************//
+
+if (typeof d3 === undefined) {
+  throw new Error("Missing dependency: d3.js. Please load this library. http://d3js.org/");
+}
+
+function SVGComic(containerSelector, opts) {
+  this.opts = opts;
+  this.container = d3.select(containerSelector);
+  
+  this._initialize();
+}
+
+SVGComic.prototype._initialize = function() {
+  // check opts
+  this._checkOpts();
+  
+  // perform update
+  this._update();
+}
+
+SVGComic.prototype._checkOpts = function() {
+  if (this.opts !== Array) {
+    this.opts = [this.opts];
+  }
+  
+  this.opts.foreach(function (element) {
+    // make any necessary changes to the options...
+  });
+}
+
+SVGComic.prototype._update = function() {
+  /* join */
+  this.svg = this.container.selectAll("svg.comic")
+    .data(this.opts)
+  ;
+  
+  /* add */
+  this.svg.enter()
+    .add("svg")
+    .attr("class", "comic")
+  ;
+  
+  /* update */
+  this.svg.transition()
+    .ease("linear")
+    .duration(1000)
+    .attr("width", function (element) {
+      return element.width;
+    })
+    .attr("height", function (element) {
+      return element.height;
+    })
+  ;
+  
+  /* remove */
+  this.svg.exit()
+    .remove()
+  ;
+}
 
 function SVGComic(evt, opts) {
   /// <summary>The main SVGComic object</summary>
